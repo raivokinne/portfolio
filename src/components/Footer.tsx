@@ -4,7 +4,7 @@ import { FaGithub } from "react-icons/fa";
 export default function Footer() {
   return (
     <>
-      <footer className="grid grid-cols-2 place-items-center h-[400px]">
+      <footer className="grid grid-cols-2 place-items-center h-[600px]">
         <div>
           <p>© 2022 Raivo Ķinne</p>
           <p>All rights reserved</p>
