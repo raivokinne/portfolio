@@ -80,6 +80,7 @@ html {
   scroll-snap-type: y mandatory;
 }
 
-section + footer {
+section,
+footer {
   scroll-snap-align: start;
 }
