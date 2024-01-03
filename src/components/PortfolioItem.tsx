@@ -16,7 +16,7 @@ export default function PortfolioItem({
       <a href={link} target="_blank">
         <article className="grid place-items-center w-[350px]">
           <h2 className="text-2xl mb-4 text-center w-full">{title}</h2>
-          <img src={image} alt={title} className="w-[350px] h-[200px]" />
+          <img src={image} alt={title} className="w-[300px] h-[200px]" />
 
           <div className="flex gap-10">
             {stack.map((item) => (
