@@ -7,38 +7,25 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 
 export default function Contact() {
-    const [formData, setFormData] = useState({
-        name: "",
-        email: "",
-        subject: "",
-        message: "",
-    });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitStatus, setSubmitStatus] = useState<string | null>(null);
-
-    const handleChange = (
-        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-    ) => {
-        const { name, value } = e.target;
-        setFormData((prev) => ({
-            ...prev,
-            [name]: value,
-        }));
-    };
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         setIsSubmitting(true);
+        const formData = new FormData(e.target as HTMLFormElement)
 
-        setTimeout(() => {
+        setTimeout(async () => {
             setSubmitStatus("success");
             setIsSubmitting(false);
-            setFormData({
-                name: "",
-                email: "",
-                subject: "",
-                message: "",
-            });
+
+            await fetch("https://getform.io/f/allqxeza", {
+                method: "POST",
+                body: formData,
+                headers: {
+                    "Accept": "application/json"
+                }
+            })
 
             setTimeout(() => setSubmitStatus(null), 5000);
         }, 1500);
@@ -108,7 +95,7 @@ export default function Contact() {
                     </motion.div>
 
                     {/* Contact Form Section */}
-                    <motion.form action="https://getform.io/f/allqxeza" method="POST" variants={itemVariants} className="space-y-6">
+                    <motion.div variants={itemVariants} className="space-y-6">
                         <motion.div
                             className="flex items-center gap-3"
                             whileHover={{ x: 5 }}
@@ -125,7 +112,10 @@ export default function Contact() {
                             whileHover={{ scale: 1.01 }}
                             transition={{ type: "spring", stiffness: 300 }}
                         >
-                            <form onSubmit={handleSubmit} className="space-y-6">
+                            <form
+                                onSubmit={handleSubmit}
+                                className="space-y-6"
+                            >
                                 <div className="grid md:grid-cols-2 gap-6">
                                     <div className="space-y-2">
                                         <label
@@ -138,8 +128,6 @@ export default function Contact() {
                                             type="text"
                                             id="name"
                                             name="name"
-                                            value={formData.name}
-                                            onChange={handleChange}
                                             placeholder="Your name"
                                             className="border-2 focus:border-purple-500 transition-all"
                                             required
@@ -156,8 +144,6 @@ export default function Contact() {
                                             type="email"
                                             id="email"
                                             name="email"
-                                            value={formData.email}
-                                            onChange={handleChange}
                                             placeholder="your.email@example.com"
                                             className="border-2 focus:border-purple-500 transition-all"
                                             required
@@ -176,8 +162,6 @@ export default function Contact() {
                                         type="text"
                                         id="subject"
                                         name="subject"
-                                        value={formData.subject}
-                                        onChange={handleChange}
                                         placeholder="What's this about?"
                                         className="border-2 focus:border-purple-500 transition-all"
                                         required
@@ -194,8 +178,6 @@ export default function Contact() {
                                     <Textarea
                                         id="message"
                                         name="message"
-                                        value={formData.message}
-                                        onChange={handleChange}
                                         rows={6}
                                         placeholder="Tell me about your project or question..."
                                         className="border-2 focus:border-purple-500 transition-all resize-none"
@@ -244,7 +226,7 @@ export default function Contact() {
                                 </Button>
                             </form>
                         </motion.div>
-                    </motion.form>
+                    </motion.div>
                 </motion.div>
             </div>
         </AppLayout>
