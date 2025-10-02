@@ -108,7 +108,7 @@ export default function Contact() {
           </motion.div>
 
           {/* Contact Form Section */}
-          <motion.div variants={itemVariants} className="space-y-6">
+          <motion.form action="https://getform.io/f/allqxeza" method="POST" variants={itemVariants} className="space-y-6">
             <motion.div
               className="flex items-center gap-3"
               whileHover={{ x: 5 }}
@@ -244,7 +244,7 @@ export default function Contact() {
                 </Button>
               </form>
             </motion.div>
-          </motion.div>
+          </motion.>
         </motion.div>
       </div>
     </AppLayout>
