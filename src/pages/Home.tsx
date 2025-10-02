@@ -5,7 +5,7 @@ import { Github, ExternalLink, Download } from "lucide-react";
 export default function Home() {
   const handleDownloadCV = () => {
     const link = document.createElement("a");
-    link.href = "/raivo.pdf";
+    link.href = "/RaivoKinneCV.pdf";
     link.download = "Raivo_Kinne_CV.pdf";
     document.body.appendChild(link);
     link.click();
