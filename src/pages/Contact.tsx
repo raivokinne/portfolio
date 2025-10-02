@@ -41,7 +41,6 @@ export default function Contact() {
     const form = e.target as HTMLFormElement;
     const formData = new FormData(form);
 
-    // Validate form data
     const data = {
       name: formData.get("name") as string,
       email: formData.get("email") as string,
@@ -106,10 +105,8 @@ export default function Contact() {
 
   return (
     <AppLayout>
-      {/* Geometric grid background */}
       <div className="fixed inset-0 -z-10 geometric-bg opacity-40" />
 
-      {/* Animated geometric shapes */}
       <motion.div
         className="fixed top-32 right-16 w-32 h-32 border-2 border-foreground/10 -z-10"
         animate={{

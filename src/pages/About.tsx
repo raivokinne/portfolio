@@ -18,7 +18,7 @@ export default function About() {
     },
     {
       category: "Tools",
-      items: ["Tmux", "Zed", "Neovim", "Docker"],
+      items: ["Tmux", "Zed", "Neovim", "Docker", "Git"],
     },
     {
       category: "Low-Level",
