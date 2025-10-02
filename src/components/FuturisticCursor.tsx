@@ -20,7 +20,7 @@ export default function FuturisticCursor() {
 
   useEffect(() => {
     let trailId = 0;
-    let timeout: NodeJS.Timeout;
+    let timeout: ReturnType<typeof setTimeout>;
 
     const handleMouseMove = (e: MouseEvent) => {
       cursorX.set(e.clientX);

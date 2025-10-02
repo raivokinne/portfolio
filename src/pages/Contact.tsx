@@ -53,7 +53,7 @@ export default function Contact() {
 
     if (!validation.success) {
       const fieldErrors: Record<string, string> = {};
-      validation.error.errors.forEach((error) => {
+      validation.error.issues.forEach((error) => {
         if (error.path[0]) {
           fieldErrors[error.path[0] as string] = error.message;
         }
@@ -76,7 +76,8 @@ export default function Contact() {
       setSubmitStatus("success");
       form.reset();
       setTimeout(() => setSubmitStatus(null), 5000);
-    } catch (error) {
+    } catch (e) {
+      console.log(e);
       setSubmitStatus("error");
       setTimeout(() => setSubmitStatus(null), 5000);
     } finally {
