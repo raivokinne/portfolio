@@ -123,7 +123,7 @@ export default function Home() {
             className="flex flex-wrap justify-center gap-6 pt-8"
           >
             <motion.a
-              href="https://github.com"
+              href="https://github.com/raivokinne"
               target="_blank"
               rel="noopener noreferrer"
               className="group relative flex items-center gap-3 px-8 py-4 bg-foreground text-background font-mono uppercase tracking-wider shadow-sharp hover:shadow-sharp-lg transition-all overflow-hidden"
