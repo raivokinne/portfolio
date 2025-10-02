@@ -1,16 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import AppLayout from "@/layouts/AppLayout";
-import {
-  Mail,
-  MapPin,
-  Github,
-  Linkedin,
-  Send,
-  Sparkles,
-  CheckCircle2,
-  MessageSquare,
-} from "lucide-react";
+import { Send, Sparkles, CheckCircle2, MessageSquare } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
@@ -71,33 +62,6 @@ export default function Contact() {
       y: 0,
     },
   };
-
-  const contactInfo = [
-    {
-      icon: Mail,
-      label: "Email",
-      value: "raivo@example.com",
-      href: "mailto:raivo@example.com",
-    },
-    {
-      icon: MapPin,
-      label: "Location",
-      value: "Riga, Latvia",
-    },
-  ];
-
-  const socialLinks = [
-    {
-      icon: Github,
-      label: "GitHub",
-      href: "https://github.com/raivokinne",
-    },
-    {
-      icon: Linkedin,
-      label: "LinkedIn",
-      href: "#",
-    },
-  ];
 
   return (
     <AppLayout>
