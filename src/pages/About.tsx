@@ -257,10 +257,9 @@ export default function About() {
             </h2>
             <p className="leading-relaxed">
               I'm always learning and expanding my skillset. Right now, I'm
-              diving deeper into cloud technologies, exploring advanced React
-              patterns, and learning more about system design and architecture.
-              The tech world moves fast, and I love keeping up with the latest
-              developments.
+              diving deeper into low lovel programming, exploring compilers and
+              learning more about system design and architecture. The tech world
+              moves fast, and I love keeping up with the latest developments.
             </p>
           </motion.div>
         </motion.div>
