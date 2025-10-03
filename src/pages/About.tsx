@@ -160,12 +160,6 @@ export default function About() {
     },
   };
 
-  const getLevelColor = (level: number) => {
-    if (level >= 80) return "bg-foreground";
-    if (level >= 60) return "bg-foreground/70";
-    return "bg-foreground/40";
-  };
-
   const getLevelLabel = (level: number) => {
     if (level >= 80) return "Advanced";
     if (level >= 60) return "Intermediate";
