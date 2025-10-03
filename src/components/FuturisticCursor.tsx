@@ -78,7 +78,7 @@ export default function FuturisticCursor() {
                     }}
                 >
                     <div
-                        className="w-4 h-4 border border-foreground/30 bg-background/10"
+                        className="w-4 h-4 border border-gray-800/60 bg-black/20"
                         style={{
                             clipPath:
                                 index % 3 === 0
@@ -93,7 +93,7 @@ export default function FuturisticCursor() {
 
             {/* Main cursor - geometric crosshair */}
             <motion.div
-                className="fixed pointer-events-none z-[10000] mix-blend-difference"
+                className="fixed pointer-events-none z-[10000]"
                 style={{
                     left: cursorXSpring,
                     top: cursorYSpring,
@@ -102,7 +102,7 @@ export default function FuturisticCursor() {
             >
                 {/* Center dot */}
                 <motion.div
-                    className="absolute w-1 h-1 bg-foreground rounded-full"
+                    className="absolute w-1 h-1 bg-gray-900 rounded-full"
                     animate={{
                         scale: isMoving ? 1.5 : 1,
                     }}
@@ -111,7 +111,7 @@ export default function FuturisticCursor() {
 
                 {/* Outer ring */}
                 <motion.div
-                    className="absolute w-8 h-8 border border-foreground -translate-x-1/2 -translate-y-1/2"
+                    className="absolute w-8 h-8 border border-gray-900 -translate-x-1/2 -translate-y-1/2"
                     animate={{
                         rotate: isMoving ? 90 : 0,
                         scale: isMoving ? 1.2 : 1,
@@ -132,25 +132,25 @@ export default function FuturisticCursor() {
                     transition={{ duration: 0.3 }}
                 >
                     {/* Top-left bracket */}
-                    <div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-foreground" />
+                    <div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-gray-900" />
                     {/* Top-right bracket */}
-                    <div className="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-foreground" />
+                    <div className="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-gray-900" />
                     {/* Bottom-left bracket */}
-                    <div className="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-foreground" />
+                    <div className="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-gray-900" />
                     {/* Bottom-right bracket */}
-                    <div className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-foreground" />
+                    <div className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-gray-900" />
                 </motion.div>
 
                 {/* Scanning lines */}
                 <motion.div
-                    className="absolute w-20 h-px bg-foreground/50 -translate-y-1/2"
+                    className="absolute w-20 h-px bg-gray-900/50 -translate-y-1/2"
                     animate={{
                         scaleX: isMoving ? [1, 1.5, 1] : 1,
                     }}
                     transition={{ duration: 0.3, repeat: isMoving ? Infinity : 0 }}
                 />
                 <motion.div
-                    className="absolute h-20 w-px bg-foreground/50 -translate-x-1/2"
+                    className="absolute h-20 w-px bg-gray-900/50 -translate-x-1/2"
                     animate={{
                         scaleY: isMoving ? [1, 1.5, 1] : 1,
                     }}
