@@ -394,7 +394,7 @@ export default function About() {
 
           <motion.div
             variants={itemVariants}
-            className="p-8 bg-foreground text-background border-4 border-foreground space-y-4 shadow-sharp-lg relative overflow-hidden"
+            className="p-8 bg-white text-black border-4 border-foreground space-y-4 shadow-sharp-lg relative overflow-hidden"
             whileHover={{ x: -4, y: -4 }}
             transition={{ type: "spring", stiffness: 300 }}
           >

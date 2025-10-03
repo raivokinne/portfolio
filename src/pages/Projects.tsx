@@ -297,7 +297,7 @@ export default function Projects() {
                         initial={{ opacity: 0, scale: 0.95 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ delay: 0.5, duration: 0.5 }}
-                        className="text-center p-10 bg-foreground text-background border-4 border-foreground shadow-sharp-lg relative overflow-hidden"
+                        className="text-center p-10 bg-white text-black border-4 border-foreground shadow-sharp-lg relative overflow-hidden"
                         whileHover={{ x: -4, y: -4 }}
                     >
                         <h3 className="text-2xl font-bold font-mono uppercase tracking-wider mb-3 pb-2 border-b-2 border-background inline-block">
@@ -312,7 +312,7 @@ export default function Projects() {
                             rel="noopener noreferrer"
                             whileHover={{ x: -4, y: -4 }}
                             whileTap={{ x: 0, y: 0 }}
-                            className="group inline-flex items-center gap-3 px-8 py-4 bg-background text-foreground border-2 border-background font-mono uppercase tracking-wider shadow-sharp hover:shadow-sharp-lg transition-all relative overflow-hidden"
+                            className="group inline-flex items-center gap-3 px-8 py-4 bg-black text-white border-2 border-background font-mono uppercase tracking-wider shadow-sharp hover:shadow-sharp-lg transition-all relative overflow-hidden"
                         >
                             <Github className="w-5 h-5" />
                             <span>Visit GitHub</span>
