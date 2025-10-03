@@ -3,7 +3,7 @@ import FuturisticCursor from "@/components/FuturisticCursor";
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   return (
-    <main className="relative min-h-screen">
+    <main>
       <Navbar />
       <FuturisticCursor />
       {children}
