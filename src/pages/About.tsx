@@ -48,7 +48,7 @@ export default function About() {
         },
         {
           name: "Htmx",
-          level: 70,
+          level: 80,
           description: "Hypermedia-driven applications",
         },
       ],
@@ -68,12 +68,12 @@ export default function About() {
         },
         {
           name: "PHP",
-          level: 70,
+          level: 80,
           description: "Server-side scripting and web development",
         },
         {
           name: "Laravel",
-          level: 65,
+          level: 80,
           description: "MVC framework and Eloquent ORM",
         },
       ],

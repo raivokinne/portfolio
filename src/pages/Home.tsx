@@ -11,7 +11,6 @@ export default function Home() {
     link.click();
     document.body.removeChild(link);
   };
-
   return (
     <AppLayout>
       <div className="fixed inset-0 -z-10 geometric-bg opacity-40" />
