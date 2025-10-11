@@ -1,12 +1,6 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
 import AppLayout from "@/layouts/AppLayout";
 import { Code, Lightbulb, Rocket, GraduationCap } from "lucide-react";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
 
 interface SkillItem {
   name: string;
@@ -20,8 +14,6 @@ interface SkillGroup {
 }
 
 export default function About() {
-  const [openSkill, setOpenSkill] = useState<string | null>(null);
-
   const skills: SkillGroup[] = [
     {
       category: "Frontend",
@@ -158,12 +150,6 @@ export default function About() {
       opacity: 1,
       y: 0,
     },
-  };
-
-  const getLevelLabel = (level: number) => {
-    if (level >= 80) return "Advanced";
-    if (level >= 60) return "Intermediate";
-    return "Learning";
   };
 
   return (
@@ -329,9 +315,6 @@ export default function About() {
             <h2 className="text-2xl font-bold font-mono uppercase tracking-wider border-b-4 border-foreground pb-2 inline-block">
               Technical Skills
             </h2>
-            <p className="text-sm text-muted-foreground font-mono">
-              Click on any skill to see proficiency details
-            </p>
             <div className="grid md:grid-cols-2 gap-6">
               {skills.map((skillGroup, index) => (
                 <motion.div
@@ -348,43 +331,13 @@ export default function About() {
                   </h3>
                   <div className="flex flex-wrap gap-2 relative z-10">
                     {skillGroup.items.map((skill) => (
-                      <Popover
-                        key={skill.name}
-                        open={openSkill === skill.name}
-                        onOpenChange={(open) =>
-                          setOpenSkill(open ? skill.name : null)
-                        }
-                      >
-                        <PopoverTrigger asChild>
-                          <motion.button
-                            className="px-3 py-1.5 bg-background border-2 border-foreground text-sm font-mono hover:bg-foreground hover:text-background transition-all cursor-pointer"
-                            whileHover={{ x: -2, y: -2 }}
-                            whileTap={{ x: 0, y: 0 }}
-                          >
-                            {skill.name}
-                          </motion.button>
-                        </PopoverTrigger>
-                        <PopoverContent className="w-80 border-4 border-foreground shadow-sharp-lg p-6 space-y-4">
-                          <div className="space-y-2">
-                            <h4 className="font-mono font-bold text-lg border-b-2 border-foreground pb-2">
-                              {skill.name}
-                            </h4>
-                            <p className="text-sm text-muted-foreground">
-                              {skill.description}
-                            </p>
-                          </div>
-                          <div className="space-y-2">
-                            <div className="flex justify-between items-center">
-                              <span className="text-sm font-mono font-bold">
-                                Proficiency
-                              </span>
-                              <span className="text-sm font-mono px-2 py-1 bg-foreground text-background">
-                                {getLevelLabel(skill.level)}
-                              </span>
-                            </div>
-                          </div>
-                        </PopoverContent>
-                      </Popover>
+                        <motion.button
+                          className="px-3 py-1.5 bg-background border-2 border-foreground text-sm font-mono hover:bg-foreground hover:text-background transition-all cursor-pointer"
+                          whileHover={{ x: -2, y: -2 }}
+                          whileTap={{ x: 0, y: 0 }}
+                        >
+                          {skill.name}
+                        </motion.button>
                     ))}
                   </div>
                 </motion.div>
