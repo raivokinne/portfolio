@@ -1,5 +1,7 @@
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import AppLayout from "@/layouts/AppLayout";
+import GeometricBackground from "@/components/GeometricBackground";
+import DecorativeShapes from "@/components/DecorativeShapes";
 import { Github, ExternalLink, Code2, Folder } from "lucide-react";
 
 export default function Projects() {
@@ -65,37 +67,8 @@ export default function Projects() {
 
     return (
         <AppLayout>
-            <div className="fixed inset-0 -z-10 geometric-bg opacity-40" />
-
-            <motion.div
-                className="fixed top-32 right-16 w-32 h-32 border-2 border-foreground/10 -z-10"
-                animate={{
-                    rotate: [0, 90, 0],
-                }}
-                transition={{
-                    duration: 20,
-                    repeat: Infinity,
-                    ease: "linear",
-                }}
-                style={{
-                    clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)",
-                }}
-            />
-            <motion.div
-                className="fixed bottom-32 left-16 w-24 h-24 border-2 border-foreground/10 -z-10"
-                animate={{
-                    rotate: [0, -90, 0],
-                }}
-                transition={{
-                    duration: 15,
-                    repeat: Infinity,
-                    ease: "linear",
-                }}
-                style={{
-                    clipPath:
-                        "polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%)",
-                }}
-            />
+            <GeometricBackground />
+            <DecorativeShapes />
 
             <div className="min-h-screen w-full py-24 px-4 relative">
                 <div className="max-w-6xl mx-auto space-y-16">

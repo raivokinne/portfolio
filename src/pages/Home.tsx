@@ -1,35 +1,23 @@
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import AppLayout from "@/layouts/AppLayout";
+import GeometricBackground from "@/components/GeometricBackground";
+import DecorativeShapes from "@/components/DecorativeShapes";
 import { Github, ExternalLink, Download } from "lucide-react";
 
 export default function Home() {
   const handleDownloadCV = () => {
     const link = document.createElement("a");
-    link.href = "/RaivoKinneCV.pdf";
-    link.download = "Raivo_Kinne_CV.pdf";
+    link.href = "/CV.pdf";
+    link.download = "CV.pdf";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
   };
+
   return (
     <AppLayout>
-      <div className="fixed inset-0 -z-10 geometric-bg opacity-40" />
-
-      <motion.div
-        className="fixed top-20 right-20 w-32 h-32 border-2 border-foreground/10 -z-10"
-        animate={{ rotate: [0, 90, 0] }}
-        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-        style={{ clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)" }}
-      />
-      <motion.div
-        className="fixed bottom-20 left-20 w-24 h-24 border-2 border-foreground/10 -z-10"
-        animate={{ rotate: [0, -90, 0] }}
-        transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-        style={{
-          clipPath:
-            "polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%)",
-        }}
-      />
+      <GeometricBackground />
+      <DecorativeShapes />
 
       <div className="min-h-screen w-full flex items-center justify-center px-4 relative">
         <motion.div
@@ -84,17 +72,8 @@ export default function Home() {
           >
             <div className="border-l-4 border-foreground pl-4 sm:pl-6 text-left">
               <p className="text-sm sm:text-base lg:text-lg text-muted-foreground leading-relaxed">
-                Passionate programming student at{" "}
-                <a
-                  href="https://www.vtdt.lv/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-bold text-foreground border-b-2 border-foreground hover:bg-foreground hover:text-background transition-colors"
-                >
-                  Vidzemes Technology and Design Technical School
-                </a>
-                . Building applications, experimenting with technologies, and
-                solving problems through code.
+                Passionate programmer building applications, experimenting with new
+                technologies, and solving real-world problems through code.
               </p>
             </div>
           </motion.div>

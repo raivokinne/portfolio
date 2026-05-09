@@ -1,143 +1,113 @@
-import { useEffect, useState } from "react";
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import { useEffect, useRef } from "react";
+import { motion, useMotionValue, useSpring } from "motion/react";
 
-interface Trail {
-  id: number;
-  x: number;
-  y: number;
-  rotation: number;
+const SHAPES = [
+  "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)",
+  "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)",
+  "polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%)",
+];
+
+interface TrailNode {
+  el: HTMLDivElement;
+  timeout: number;
 }
 
 export default function FuturisticCursor() {
-  const [trails, setTrails] = useState<Trail[]>([]);
-  const [isMoving, setIsMoving] = useState(false);
-  const cursorX = useMotionValue(0);
-  const cursorY = useMotionValue(0);
+  const cursorX = useMotionValue(-100);
+  const cursorY = useMotionValue(-100);
+  const trailsRef = useRef<TrailNode[]>([]);
+  const shapeIndex = useRef(0);
 
-  const springConfig = { damping: 25, stiffness: 400 };
+  const springConfig = { damping: 25, stiffness: 1200 };
   const cursorXSpring = useSpring(cursorX, springConfig);
   const cursorYSpring = useSpring(cursorY, springConfig);
 
   useEffect(() => {
-    let trailId = 0;
-    let timeout: ReturnType<typeof setTimeout>;
+    document.body.style.cursor = "none";
+    document.body.style.userSelect = "none";
 
+    const addTrail = (x: number, y: number) => {
+      const trail = document.createElement("div");
+      trail.className = "fixed pointer-events-none z-[9999]";
+      const shape = SHAPES[shapeIndex.current % SHAPES.length];
+      shapeIndex.current++;
+      trail.style.cssText = `
+        left: ${x}px; top: ${y}px;
+        width: 16px; height: 16px;
+        transform: translate(-50%, -50%);
+        border: 2px solid rgba(0,0,0,0.35);
+        background: rgba(0,0,0,0.08);
+        clip-path: ${shape};
+        transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+        opacity: 0.5;
+      `;
+      document.body.appendChild(trail);
+
+      requestAnimationFrame(() => {
+        trail.style.opacity = "0";
+        trail.style.transform = "translate(-50%, -50%) scale(0.2)";
+      });
+
+      const timeout = window.setTimeout(() => {
+        trail.remove();
+      }, 300);
+
+      trailsRef.current.push({ el: trail, timeout });
+      while (trailsRef.current.length > 6) {
+        const old = trailsRef.current.shift();
+        if (old) {
+          clearTimeout(old.timeout);
+          old.el.remove();
+        }
+      }
+    };
+
+    let throttleTimer: number | undefined;
     const handleMouseMove = (e: MouseEvent) => {
       cursorX.set(e.clientX);
       cursorY.set(e.clientY);
-
-      setIsMoving(true);
-      clearTimeout(timeout);
-      timeout = setTimeout(() => setIsMoving(false), 100);
-
-      const newTrail: Trail = {
-        id: trailId++,
-        x: e.clientX,
-        y: e.clientY,
-        rotation: Math.random() * 360,
-      };
-
-      setTrails((prev) => [...prev.slice(-8), newTrail]);
+      if (!throttleTimer) {
+        throttleTimer = window.setTimeout(() => {
+          throttleTimer = undefined;
+        }, 24);
+        addTrail(e.clientX, e.clientY);
+      }
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
 
     return () => {
+      document.body.style.cursor = "";
+      document.body.style.userSelect = "";
       window.removeEventListener("mousemove", handleMouseMove);
-      clearTimeout(timeout);
+      if (throttleTimer) clearTimeout(throttleTimer);
+      trailsRef.current.forEach((t) => {
+        clearTimeout(t.timeout);
+        t.el.remove();
+      });
+      trailsRef.current = [];
     };
   }, [cursorX, cursorY]);
 
-  useEffect(() => {
-    if (trails.length > 0) {
-      const timer = setTimeout(() => {
-        setTrails((prev) => prev.slice(1));
-      }, 50);
-      return () => clearTimeout(timer);
-    }
-  }, [trails]);
-
   return (
-    <>
-      {/* Trail shapes */}
-      {trails.map((trail, index) => (
-        <motion.div
-          key={trail.id}
-          className="fixed pointer-events-none z-[9999]"
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{
-            opacity: 0.3 - index * 0.03,
-            scale: 1 - index * 0.1,
-          }}
-          exit={{ opacity: 0, scale: 0 }}
-          transition={{ duration: 0.2 }}
-          style={{
-            left: trail.x,
-            top: trail.y,
-            transform: `translate(-50%, -50%) rotate(${trail.rotation}deg)`,
-          }}
-        >
-          <div
-            className="w-4 h-4 border border-gray-800/60 bg-black/20"
-            style={{
-              clipPath:
-                index % 3 === 0
-                  ? "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)"
-                  : index % 3 === 1
-                    ? "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)"
-                    : "polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%)",
-            }}
-          />
-        </motion.div>
-      ))}
-
-      {/* Main cursor - geometric crosshair */}
+    <motion.div
+      className="fixed pointer-events-none z-[10000]"
+      style={{
+        left: cursorXSpring,
+        top: cursorYSpring,
+        x: "-50%",
+        y: "-50%",
+      }}
+    >
       <motion.div
-        className="fixed pointer-events-none z-[10000]"
+        className="w-8 h-8 bg-background/90 border-[3px] border-foreground shadow-sharp-sm"
         style={{
-          left: cursorXSpring,
-          top: cursorYSpring,
-          transform: "translate(-50%, -50%)",
+          clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)",
         }}
-      >
-        {/* Corner brackets */}
-        <motion.div
-          className="absolute w-3 h-3 -translate-x-1/2 -translate-y-1/2"
-          animate={{
-            rotate: isMoving ? -90 : 0,
-          }}
-          transition={{ duration: 0.3 }}
-        >
-          {/* Top-left bracket */}
-          <div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-gray-900" />
-          {/* Top-right bracket */}
-          <div className="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-gray-900" />
-          {/* Bottom-left bracket */}
-          <div className="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-gray-900" />
-          {/* Bottom-right bracket */}
-          <div className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-gray-900" />
-        </motion.div>
-
-        {/* Scanning lines */}
-        <motion.div
-          className="absolute w-1 h-px bg-gray-900/50 -translate-y-1/2"
-          animate={{
-            scaleX: isMoving ? [1, 1.5, 1] : 1,
-          }}
-          transition={{ duration: 0.3, repeat: isMoving ? Infinity : 0 }}
-        />
-        <motion.div
-          className="absolute h-1 w-px bg-gray-900/50 -translate-x-1/2"
-          animate={{
-            scaleY: isMoving ? [1, 1.5, 1] : 1,
-          }}
-          transition={{
-            duration: 0.3,
-            repeat: isMoving ? Infinity : 0,
-            delay: 0.15,
-          }}
-        />
-      </motion.div>
-    </>
+        animate={{ rotate: 360 }}
+        transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+      />
+      <div className="absolute top-1/2 left-1/2 w-[5px] h-[5px] bg-foreground -translate-x-1/2 -translate-y-1/2" />
+    </motion.div>
   );
 }
