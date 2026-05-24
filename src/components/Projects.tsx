@@ -1,0 +1,119 @@
+import { motion } from "motion/react";
+import { Github, ExternalLink } from "lucide-react";
+import { SectionHeading, SectionSubtitle, FadeIn } from "@/components/SectionHeading";
+
+const projects = [
+  {
+    title: "Lynx",
+    description: "A custom programming language with real-time code execution and syntax highlighting. Built from scratch to explore compiler construction.",
+    tags: ["Go", "React", "Express.js"],
+    github: "https://github.com/raivokinne/lynx",
+    live: "https://www.lynxlang.site",
+  },
+  {
+    title: "YouTube Clone",
+    description: "Feature-rich video sharing platform with auth, upload, streaming, comments, and likes.",
+    tags: ["React", "Laravel", "MySQL", "Tailwind CSS"],
+    github: "https://github.com/raivokinne/youtube-clone",
+    live: null,
+  },
+  {
+    title: "Minamell",
+    description: "A lightweight PHP framework with MVC architecture, routing, and database abstraction.",
+    tags: ["PHP", "Composer"],
+    github: "https://github.com/raivokinne/minamell",
+    live: null,
+  },
+  {
+    title: "Notes",
+    description: "Clean note-taking app with rich text editing, categorization, and search.",
+    tags: ["React", "Laravel", "Tailwind CSS"],
+    github: "https://github.com/raivokinne/notes",
+    live: null,
+  },
+];
+
+export default function Projects() {
+  return (
+    <section id="projects" className="min-h-dvh py-32 px-6 relative">
+      <div className="max-w-5xl mx-auto">
+        <div className="mb-16">
+          <SectionHeading>Projects</SectionHeading>
+          <SectionSubtitle>Things I've built to learn and experiment</SectionSubtitle>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-6">
+          {projects.map((project, i) => (
+            <FadeIn key={project.title} delay={i * 0.1}>
+              <motion.div
+                whileHover={{ y: -4 }}
+                className="group p-6 border border-foreground/10 rounded-xl bg-background/50 hover:border-foreground/30 hover:shadow-sm transition-all"
+              >
+                <div className="flex items-start justify-between mb-4">
+                  <h3 className="text-lg font-bold font-mono tracking-tight">
+                    {project.title}
+                  </h3>
+                  <div className="flex gap-2">
+                    {project.github && (
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-2 text-muted-foreground hover:text-foreground transition-colors"
+                        aria-label="GitHub"
+                      >
+                        <Github className="w-4 h-4" />
+                      </a>
+                    )}
+                    {project.live && (
+                      <a
+                        href={project.live}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-2 text-muted-foreground hover:text-foreground transition-colors"
+                        aria-label="Live demo"
+                      >
+                        <ExternalLink className="w-4 h-4" />
+                      </a>
+                    )}
+                  </div>
+                </div>
+                <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+                  {project.description}
+                </p>
+                <div className="flex flex-wrap gap-1.5">
+                  {project.tags.map(tag => (
+                    <span
+                      key={tag}
+                      className="px-2.5 py-1 text-xs font-mono bg-foreground/5 rounded-md"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+            </FadeIn>
+          ))}
+        </div>
+
+        <FadeIn delay={0.3}>
+          <motion.div
+            whileHover={{ scale: 1.02 }}
+            className="mt-10 text-center"
+          >
+            <a
+              href="https://github.com/raivokinne"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-sm font-mono tracking-wider text-muted-foreground hover:text-foreground transition-colors"
+            >
+              <Github className="w-4 h-4" />
+              See more on GitHub
+              <ExternalLink className="w-3 h-3" />
+            </a>
+          </motion.div>
+        </FadeIn>
+      </div>
+    </section>
+  );
+}

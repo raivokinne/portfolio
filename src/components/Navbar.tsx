@@ -1,148 +1,111 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { X, Menu } from "lucide-react";
+import { Menu, X } from "lucide-react";
+
+const sections = [
+  { id: "home", label: "Home" },
+  { id: "about", label: "About" },
+  { id: "experience", label: "Experience" },
+  { id: "projects", label: "Projects" },
+  { id: "contact", label: "Contact" },
+];
 
 export default function Navbar() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [active, setActive] = useState("home");
   const [scrolled, setScrolled] = useState(false);
-  const [currentPath, setCurrentPath] = useState("/");
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
-    setCurrentPath(window.location.pathname);
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const navLinks = [
-    { href: "/", label: "Home" },
-    { href: "/about", label: "About" },
-    { href: "/projects", label: "Projects" },
-    { href: "/contact", label: "Contact" },
-  ];
+  useEffect(() => {
+    const observers: IntersectionObserver[] = [];
+    for (const { id } of sections) {
+      const el = document.getElementById(id);
+      if (!el) continue;
+      const obs = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) setActive(id);
+        },
+        { threshold: 0.3 }
+      );
+      obs.observe(el);
+      observers.push(obs);
+    }
+    return () => observers.forEach(o => o.disconnect());
+  }, []);
+
+  const scrollTo = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    setMobileOpen(false);
+  };
 
   return (
     <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
+      initial={{ y: -20, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-background border-b-4 border-foreground"
-          : "bg-background/80 backdrop-blur-sm border-b-2 border-foreground/30"
+        scrolled ? "bg-background/70 backdrop-blur-lg border-b border-foreground/5" : ""
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          <motion.a
-            href="/"
-            className="flex items-center gap-3 group"
-            whileHover={{ x: -2, y: -2 }}
-            whileTap={{ x: 0, y: 0 }}
-          >
-            <motion.div
-              className="w-10 h-10 bg-foreground text-background border-2 border-foreground flex items-center justify-center text-lg font-bold font-mono shadow-sharp-sm"
-              whileHover={{ rotate: 90 }}
-              transition={{ duration: 0.3 }}
+      <div className="max-w-5xl mx-auto px-6 h-14 flex items-center justify-between">
+        <button
+          onClick={() => scrollTo("home")}
+          className="text-sm font-mono font-bold tracking-tight"
+        >
+          RK
+        </button>
+
+        <div className="hidden md:flex items-center gap-1">
+          {sections.map(({ id, label }) => (
+            <button
+              key={id}
+              onClick={() => scrollTo(id)}
+              className={`px-3 py-1.5 text-xs font-mono tracking-widest uppercase transition-all ${
+                active === id
+                  ? "text-foreground"
+                  : "text-muted-foreground/60 hover:text-muted-foreground"
+              }`}
             >
-              RK
-            </motion.div>
-            <span className="text-foreground font-bold text-lg font-mono uppercase tracking-wider hidden sm:inline">
-              Raivo Kinne
-            </span>
-          </motion.a>
-
-          <div className="hidden md:flex items-center gap-2">
-            {navLinks.map((link, index) => {
-              const isActive = currentPath === link.href;
-              return (
-                <motion.a
-                  key={link.href}
-                  href={link.href}
-                  className={`relative px-4 py-2 font-mono uppercase tracking-wider text-sm border-2 transition-all ${
-                    isActive
-                      ? "border-foreground bg-foreground text-background shadow-sharp-sm"
-                      : "border-transparent text-foreground hover:border-foreground hover:shadow-sharp-sm"
-                  }`}
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  whileHover={{ x: -2, y: -2 }}
-                  whileTap={{ x: 0, y: 0 }}
-                >
-                  {link.label}
-                </motion.a>
-              );
-            })}
-          </div>
-
-          <motion.button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 text-foreground border-2 border-foreground hover:bg-foreground hover:text-background transition-colors"
-            aria-label="Toggle menu"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <AnimatePresence mode="wait">
-              {mobileMenuOpen ? (
-                <motion.div
-                  key="close"
-                  initial={{ rotate: -90, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  exit={{ rotate: 90, opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <X className="w-6 h-6" />
-                </motion.div>
-              ) : (
-                <motion.div
-                  key="menu"
-                  initial={{ rotate: 90, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  exit={{ rotate: -90, opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <Menu className="w-6 h-6" />
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.button>
+              {label}
+            </button>
+          ))}
         </div>
+
+        <button
+          onClick={() => setMobileOpen(!mobileOpen)}
+          className="md:hidden p-2 text-muted-foreground"
+          aria-label="Menu"
+        >
+          {mobileOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
+        </button>
       </div>
 
       <AnimatePresence>
-        {mobileMenuOpen && (
+        {mobileOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-            className="md:hidden bg-background border-t-4 border-foreground overflow-hidden"
+            className="md:hidden bg-background/90 backdrop-blur-lg border-t border-foreground/5 overflow-hidden"
           >
-            <div className="px-4 py-4 space-y-2">
-              {navLinks.map((link, index) => {
-                const isActive = currentPath === link.href;
-                return (
-                  <motion.a
-                    key={link.href}
-                    href={link.href}
-                    className={`block px-4 py-3 font-mono uppercase tracking-wider border-2 transition-all ${
-                      isActive
-                        ? "border-foreground bg-foreground text-background"
-                        : "border-foreground text-foreground hover:bg-foreground hover:text-background"
-                    }`}
-                    onClick={() => setMobileMenuOpen(false)}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1 }}
-                    whileHover={{ x: 4 }}
-                  >
-                    {link.label}
-                  </motion.a>
-                );
-              })}
+            <div className="px-6 py-3 space-y-1">
+              {sections.map(({ id, label }) => (
+                <button
+                  key={id}
+                  onClick={() => scrollTo(id)}
+                  className={`block w-full text-left px-3 py-2.5 text-sm font-mono tracking-wider uppercase rounded-lg ${
+                    active === id
+                      ? "text-foreground"
+                      : "text-muted-foreground"
+                  }`}
+                >
+                  {label}
+                </button>
+              ))}
             </div>
           </motion.div>
         )}
