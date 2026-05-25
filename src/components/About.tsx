@@ -20,7 +20,7 @@ export default function About() {
 					<div className="lg:col-span-3 space-y-5">
 						<FadeIn>
 							<p className="text-lg leading-relaxed">
-								I'm a developer from Cēsis, Latvia. I build web apps with React,
+								I'm Raivo Kinne, a developer from Cēsis, Latvia. I build web apps with React,
 								TypeScript, Laravel, and PHP. I like turning ideas into things
 								that actually work.
 							</p>
