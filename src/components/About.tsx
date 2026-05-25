@@ -20,25 +20,23 @@ export default function About() {
 					<div className="lg:col-span-3 space-y-5">
 						<FadeIn>
 							<p className="text-lg leading-relaxed">
-								I'm a Programming Technician and Full-Stack Developer from Cēsis,
-								Latvia. I build modern web applications with React,
-								TypeScript, Laravel, and PHP.
+								I'm a developer from Cēsis, Latvia. I build web apps with React,
+								TypeScript, Laravel, and PHP. I like turning ideas into things
+								that actually work.
 							</p>
 						</FadeIn>
 						<FadeIn delay={0.1}>
 							<p className="text-lg leading-relaxed text-muted-foreground">
-								I bring strong problem-solving skills, a bias toward action, and
-								the ability to work across the full stack — from designing
-								responsive UIs to building efficient APIs and managing databases.
-								I'm comfortable owning a feature from concept to deployment.
+								I can work on the frontend, backend, or databases — whatever a
+								project needs. I'm comfortable figuring things out on my own and
+								shipping features from start to finish.
 							</p>
 						</FadeIn>
 						<FadeIn delay={0.2}>
 							<p className="text-lg leading-relaxed text-muted-foreground">
-								I'm currently exploring full-time opportunities where I can
-								contribute to meaningful products, collaborate with experienced
-								engineers, and continue growing as a developer. Let's build
-								something great together.
+								I'm looking for a full-time role where I can work on real
+								products, learn from the people around me, and keep getting
+								better at what I do.
 							</p>
 						</FadeIn>
 					</div>
