@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from "motion/react";
 import { Menu, X } from "lucide-react";
 
 const sections = [
-  { id: "home", label: "Home" },
   { id: "about", label: "About" },
   { id: "experience", label: "Experience" },
   { id: "projects", label: "Projects" },
@@ -11,7 +10,7 @@ const sections = [
 ];
 
 export default function Navbar() {
-  const [active, setActive] = useState("home");
+  const [active, setActive] = useState("about");
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -53,7 +52,7 @@ export default function Navbar() {
     >
       <div className="max-w-5xl mx-auto px-6 h-14 flex items-center justify-between">
         <button
-          onClick={() => scrollTo("home")}
+          onClick={() => scrollTo("about")}
           className="text-sm font-mono font-bold tracking-tight"
         >
           RK

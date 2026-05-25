@@ -1,6 +1,5 @@
 import Navbar from "@/components/Navbar";
 import FuturisticCursor from "@/components/FuturisticCursor";
-import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Experience from "@/components/Experience";
 import Projects from "@/components/Projects";
@@ -12,7 +11,6 @@ export default function App() {
       <FuturisticCursor />
       <Navbar />
       <div className="fixed inset-0 -z-10 geometric-bg opacity-30" />
-      <Hero />
       <About />
       <Experience />
       <Projects />
