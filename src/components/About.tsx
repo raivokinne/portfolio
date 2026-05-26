@@ -1,3 +1,5 @@
+import { motion } from "motion/react";
+import { FileText } from "lucide-react";
 import { SectionHeading, SectionSubtitle, FadeIn } from "@/components/SectionHeading";
 
 const skillsCategories = [
@@ -27,17 +29,43 @@ export default function About() {
 						</FadeIn>
 						<FadeIn delay={0.1}>
 							<p className="text-lg leading-relaxed text-muted-foreground">
+								I graduated as a Programming Technician from{" "}
+								<a
+									href="https://www.vtdt.lv/"
+									target="_blank"
+									rel="noopener noreferrer"
+									className="text-foreground underline underline-offset-4 decoration-foreground/30 hover:decoration-foreground transition-colors"
+								>
+									Vidzemes Tehnoloģiju un Dizaina Tehnikums
+								</a>
+								, where I built a strong foundation in software development and engineering practices.
+							</p>
+						</FadeIn>
+						<FadeIn delay={0.2}>
+							<p className="text-lg leading-relaxed text-muted-foreground">
 								I can work on the frontend, backend, or databases — whatever a
 								project needs. I'm comfortable figuring things out on my own and
 								shipping features from start to finish.
 							</p>
 						</FadeIn>
-						<FadeIn delay={0.2}>
+						<FadeIn delay={0.3}>
 							<p className="text-lg leading-relaxed text-muted-foreground">
 								I'm looking for a full-time role where I can work on real
 								products, learn from the people around me, and keep getting
 								better at what I do.
 							</p>
+						</FadeIn>
+						<FadeIn delay={0.4}>
+							<motion.a
+								href="/raivo_ķinne_cv.pdf"
+								download
+								whileHover={{ scale: 1.02 }}
+								whileTap={{ scale: 0.98 }}
+								className="inline-flex items-center gap-2 px-6 py-3 border border-foreground/20 rounded-full text-sm font-mono tracking-wider font-medium hover:border-foreground/50 transition-colors"
+							>
+								<FileText className="w-4 h-4" />
+								Download CV
+							</motion.a>
 						</FadeIn>
 					</div>
 
