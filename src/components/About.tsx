@@ -50,9 +50,8 @@ export default function About() {
 						</FadeIn>
 						<FadeIn delay={0.3}>
 							<p className="text-lg leading-relaxed text-muted-foreground">
-								I'm looking for a full-time role where I can work on real
-								products, learn from the people around me, and keep getting
-								better at what I do.
+								I enjoy building side projects, experimenting with new technologies,
+								and constantly learning — there's always something new to figure out.
 							</p>
 						</FadeIn>
 						<FadeIn delay={0.4}>
