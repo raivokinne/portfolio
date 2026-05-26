@@ -6,7 +6,7 @@ const skillsCategories = [
 	{ category: "Frontend", items: ["React", "TypeScript", "Tailwind CSS", "HTML/CSS", "Htmx"] },
 	{ category: "Backend", items: ["Golang", "Express.js", "PHP", "Laravel"] },
 	{ category: "Database", items: ["SQLite", "PostgreSQL", "MySQL"] },
-	{ category: "Tools", items: ["Tmux", "Neovim", "Docker", "Git"] },
+	{ category: "Tools", items: ["Emacs"] },
 ];
 
 export default function About() {
