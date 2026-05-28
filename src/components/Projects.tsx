@@ -4,17 +4,38 @@ import { SectionHeading, SectionSubtitle, FadeIn } from "@/components/SectionHea
 
 const projects = [
 	{
-		title: "Lynx",
-		description: "A custom programming language with real-time code execution and syntax highlighting. Built from scratch to explore compiler construction.",
-		tags: ["Go", "React", "Express.js"],
-		github: "https://github.com/raivokinne/lynx",
+		title: "Shithead",
+		description: "Online multiplayer card game client built with React. Features real-time gameplay, matchmaking, and player profiles.",
+		tags: ["TypeScript", "React", "Tailwind CSS"],
+		github: "https://github.com/raivokinne/shithead-client",
 		live: null,
 	},
 	{
-		title: "YouTube Clone",
-		description: "Feature-rich video sharing platform with auth, upload, streaming, comments, and likes.",
-		tags: ["React", "Laravel", "MySQL", "Tailwind CSS"],
-		github: "https://github.com/raivokinne/youtube-clone",
+		title: "Shithead API",
+		description: "Real-time WebSocket game server for the card game Shithead. Built with Go and Fiber, backed by PostgreSQL.",
+		tags: ["Go", "PostgreSQL", "WebSocket"],
+		github: "https://github.com/raivokinne/shithead-api-v2",
+		live: null,
+	},
+	{
+		title: "PHPVM",
+		description: "Lightweight PHP version manager that registers system PHP installations, switches between versions, and manages PATH symlinks.",
+		tags: ["PHP", "Shell"],
+		github: "https://github.com/raivokinne/phpvm",
+		live: null,
+	},
+	{
+		title: "Turnikets",
+		description: "Event ticketing platform with a React frontend, Laravel API, and Python service for ticket generation.",
+		tags: ["TypeScript", "Laravel", "React", "Python"],
+		github: "https://github.com/raivokinne/turnikets",
+		live: null,
+	},
+	{
+		title: "Lynx",
+		description: "An interpreted programming language with a web-based IDE featuring real-time code execution and syntax highlighting.",
+		tags: ["Go", "React", "Express.js"],
+		github: "https://github.com/raivokinne/lynx",
 		live: null,
 	},
 	{
@@ -22,13 +43,6 @@ const projects = [
 		description: "A lightweight PHP framework with MVC architecture, routing, and database abstraction.",
 		tags: ["PHP", "Composer"],
 		github: "https://github.com/raivokinne/minamell",
-		live: null,
-	},
-	{
-		title: "Notes",
-		description: "Clean note-taking app with rich text editing, categorization, and search.",
-		tags: ["React", "Laravel", "Tailwind CSS"],
-		github: "https://github.com/raivokinne/notes",
 		live: null,
 	},
 ];
