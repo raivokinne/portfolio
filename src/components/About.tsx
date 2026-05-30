@@ -44,8 +44,7 @@ export default function About() {
 						<FadeIn delay={0.2}>
 							<p className="text-lg leading-relaxed text-muted-foreground">
 								I can work on the frontend, backend, or databases — whatever a
-								project needs. I'm comfortable figuring things out on my own and
-								shipping features from start to finish.
+								project needs. I'm comfortable figuring things out on my own.
 							</p>
 						</FadeIn>
 						<FadeIn delay={0.3}>
